@@ -12,12 +12,12 @@ try{ var base = window; }catch( error ){ var base = exports; }
 					var width = window.innerWidth;
 					var height = window.innerHeight;
 					htmlElement.css( {
-						"width": width,
-						"height": height
+						"width": width + "px",
+						"height": height + "px"
 					} );
 					bodyElement.css( {
-						"width": width,
-						"height": height
+						"width": width + "px",
+						"height": height + "px"
 					} );
 				};
 				if( autoResizeInitialize ){
@@ -28,12 +28,16 @@ try{ var base = window; }catch( error ){ var base = exports; }
 				var htmlElement = $( "html" );
 				var bodyElement = $( "body" );
 				$( window ).resize( function onResize( ){
+					var width = window.innerWidth;
+					var height = window.innerHeight;
 					amplify.publish( "window-resize", {
-						"width": window.innerWidth,
-						"height": window.innerHeight
+						"width": width,
+						"height": height
 					} );
 					forceResize( );
+					console.log( "Auto-resized to ( "+ width + ", " + height + " )." );
 				} );
+				forceResize( );
 			};
 			base.forceAutoResize = forceAutoResize;
 			return forceAutoResize;
